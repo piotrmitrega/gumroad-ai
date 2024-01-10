@@ -18,10 +18,6 @@
 
   --border-color: #646464;
 
-  a {
-    text-decoration: none;
-  }
-
   h1 {
     margin: 1rem 0;
     font-size: 2.5rem;
@@ -33,4 +29,12 @@
     font-family: "Mabry Pro";
     src: url(https://assets.gumroad.com/assets/mabry-regular-pro-2987dea5e28da4cf6ec452e081243d69aa29503e7f870eddabcb2225dac42343.woff2)
   }
+}
+
+a {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4  {
+  margin: 0;
 }

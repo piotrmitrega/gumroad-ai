@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { PageWrapper } from "../../components/layout/PageWrapper";
 import { HeaderWrapper } from "../../components/layout/HeaderWrapper";
 import { useFetchRequest } from "../../hooks/useFetchRequest";
 import { PageContentWrapper } from "../../components/layout/PageContentWrapper";
 import { Product, Sale } from "../../types/api";
-import { StatSections } from "../../components/dashboard/StatSections";
+import { StatsSections } from "../../components/dashboard/././StatsSection";
+import { ProductsSection } from "../../components/dashboard/ProductsSection";
+import { ActivitySection } from "../../components/dashboard/ActivitySection";
 
 export const DashboardPage = (): JSX.Element => {
   const {
@@ -18,6 +20,22 @@ export const DashboardPage = (): JSX.Element => {
     isError: isSalesError,
     isFetching: isFetchingSales
   } = useFetchRequest<Sale[]>("/api/sales");
+
+  const [totalSales, totalRevenue] = useMemo(() => {
+    if (!products) {
+      return [];
+    }
+
+    let totalSalesValue = 0;
+    let totalRevenueValue = 0;
+
+    products.forEach(product => {
+      totalSalesValue += product.sales_count;
+      totalRevenueValue += product.sales_usd_cents;
+    });
+
+    return [totalSalesValue, totalRevenueValue / 100];
+  }, [products]);
 
   if (isFetchingProducts || isFetchingSales) {
     return <div>Loading...</div>;
@@ -34,7 +52,16 @@ export const DashboardPage = (): JSX.Element => {
       </HeaderWrapper>
 
       <PageContentWrapper>
-        <StatSections products={products} sales={sales} />
+        <StatsSections
+          totalSales={totalSales}
+          totalRevenue={totalRevenue}
+        />
+        <ProductsSection
+          products={products}
+          totalSales={totalSales}
+          totalRevenue={totalRevenue}
+        />
+        <ActivitySection sales={sales} />
       </PageContentWrapper>
     </PageWrapper>
   );
