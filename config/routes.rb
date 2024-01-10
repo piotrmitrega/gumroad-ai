@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
 
   get 'api/products', to: 'api#products'
+  get 'api/sales', to: 'api#sales'
+  get 'api/user', to: 'api#user'
   # Add more API endpoints here as needed
 
   # Redirect all other routes back to front-end React application
