@@ -9,4 +9,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+
+  get 'api/products', to: 'api#products'
+  # Add more API endpoints here as needed
+
+  # Redirect all other routes back to front-end React application
+  # If we don't do this, refreshing the page will break as Rails will not know
+  # how to redirect back to React SPA.
+  get '*path', to: "homepage#index", constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
 end
