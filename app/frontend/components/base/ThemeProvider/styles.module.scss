@@ -1,13 +1,9 @@
 .themeProvider {
   height: 100%;
   background-color: var(--background-primary-color);
-  font-family: Mabry Pro,
-  Avenir,
-  Montserrat,
-  Corbel,
-  URW Gothic,
-  source-sans-pro,
-  sans-serif;
+  font-family: Mabry Pro, Avenir, Montserrat, Corbel, URW Gothic, source-sans-pro, sans-serif;
+  color: var(--text-primary-color);
+
   font-size: 16px;
 
   --background-primary-color: #242423;
@@ -20,5 +16,21 @@
 
   --text-muted-color: #dddddd80;
 
-  --border-color: #dddddd59;
+  --border-color: #646464;
+
+  a {
+    text-decoration: none;
+  }
+
+  h1 {
+    margin: 1rem 0;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: "Mabry Pro";
+    src: url(https://assets.gumroad.com/assets/mabry-regular-pro-2987dea5e28da4cf6ec452e081243d69aa29503e7f870eddabcb2225dac42343.woff2)
+  }
 }

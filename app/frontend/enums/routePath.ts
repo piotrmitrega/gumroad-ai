@@ -1,4 +1,4 @@
 export enum RoutePath {
-  Dashboard = 'dashboard',
-  Products = 'products'
+  Dashboard = '/dashboard',
+  Products = '/products'
 }
