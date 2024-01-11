@@ -10,11 +10,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-
-  get 'api/products', to: 'api#products'
-  get 'api/sales', to: 'api#sales'
-  get 'api/user', to: 'api#user'
-  # Add more API endpoints here as needed
+  namespace :api do
+    get 'products', to: 'gumroad#products'
+    get 'sales', to: 'gumroad#sales'
+    get 'user', to: 'gumroad#user'
+  end
 
   # Redirect all other routes back to front-end React application
   # If we don't do this, refreshing the page will break as Rails will not know

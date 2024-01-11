@@ -1,4 +1,4 @@
-class ApiController < ApplicationController
+class Api::GumroadController < ApplicationController
   before_action :set_gumroad_service
 
   def products
