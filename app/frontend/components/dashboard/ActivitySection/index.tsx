@@ -19,7 +19,7 @@ export const ActivitySection = ({
       <div className={styles.stack}>
         {sales.map(sale => {
           return (
-            <div className={styles.listItem}>
+            <div key={sale.id} className={styles.listItem}>
               <Icon className={styles.icon} iconType={IconType.DollarOutline} />
 
               <span>New sale of <u>{sale.product_name}</u> for {sale.formatted_total_price}</span>

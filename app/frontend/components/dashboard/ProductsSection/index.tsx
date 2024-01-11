@@ -34,7 +34,7 @@ export const ProductsSection = ({
 
       {products.map(product => {
         return (
-          <tr>
+          <tr key={product.id}>
             <td className={styles.thumbnailCell}>
               {product.thumbnail_url ? (
                 <img className={styles.thumbnailImg} src={product.thumbnail_url} />

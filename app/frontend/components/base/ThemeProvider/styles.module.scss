@@ -10,6 +10,8 @@
   --background-secondary-color: #000000;
 
   --accent-color: #ff90e8;
+  --gummy-color: #0077cc;
+
   --success-color: #23a094;
 
   --text-primary-color: #dddddd;
@@ -17,6 +19,8 @@
   --text-muted-color: #dddddd80;
 
   --border-color: #646464;
+
+  --gummy-box-shadow: 0 0 10px #0077cc, 0 0 0 2px #0077cc;
 
   h1 {
     margin: 1rem 0;
@@ -28,6 +32,15 @@
   @font-face {
     font-family: "Mabry Pro";
     src: url(https://assets.gumroad.com/assets/mabry-regular-pro-2987dea5e28da4cf6ec452e081243d69aa29503e7f870eddabcb2225dac42343.woff2)
+  }
+
+  @font-face {
+    font-family: 'Baloo 2';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/baloo2/v21/wXKrE3kTposypRyd51ncAM4olXcLtA.woff2) format('woff2');
+    unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF;
   }
 }
 

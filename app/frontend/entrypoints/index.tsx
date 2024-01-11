@@ -5,6 +5,7 @@ import { Navbar } from "../components/navigation/Navbar";
 import { ThemeProvider } from "../components/base/ThemeProvider";
 import { AppRoutes } from "../components/routing/AppRoutes";
 import { AppLayoutWrapper } from "../components/layout/AppLayoutWrapper";
+import { GummyContextProvider } from "../contexts/GumyContext";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -13,10 +14,12 @@ root.render(
   <React.StrictMode>
     <ThemeProvider>
       <BrowserRouter>
-        <AppLayoutWrapper>
-          <Navbar />
-          <AppRoutes />
-        </AppLayoutWrapper>
+        <GummyContextProvider>
+          <AppLayoutWrapper>
+            <Navbar />
+            <AppRoutes />
+          </AppLayoutWrapper>
+        </GummyContextProvider>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>

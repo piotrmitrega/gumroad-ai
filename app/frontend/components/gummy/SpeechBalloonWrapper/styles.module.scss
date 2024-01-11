@@ -1,0 +1,16 @@
+.speechBalloon {
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 15px;
+  color: var(--text-primary-color);
+  background-color: var(--background-secondary-color);
+  border:1px solid var(--border-color);
+  padding: 1rem;
+  min-width: 200px;
+  max-width: 300px;
+  width: max-content;
+  border-radius: 11px;
+  position: relative;
+  box-shadow: 10px 10px var(--gummy-color);
+  min-height: 2rem;
+}

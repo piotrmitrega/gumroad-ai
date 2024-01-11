@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { PageWrapper } from "../../components/layout/PageWrapper";
 import { HeaderWrapper } from "../../components/layout/HeaderWrapper";
 import { useFetchRequest } from "../../hooks/useFetchRequest";
@@ -7,6 +7,8 @@ import { Product, Sale } from "../../types/api";
 import { StatsSections } from "../../components/dashboard/././StatsSection";
 import { ProductsSection } from "../../components/dashboard/ProductsSection";
 import { ActivitySection } from "../../components/dashboard/ActivitySection";
+import { GummyAvatar } from "../../components/gummy/GummyAvatar";
+import { GummyMood } from "../../enums/gummyMood";
 
 export const DashboardPage = (): JSX.Element => {
   const {
@@ -20,6 +22,20 @@ export const DashboardPage = (): JSX.Element => {
     isError: isSalesError,
     isFetching: isFetchingSales
   } = useFetchRequest<Sale[]>("/api/sales");
+
+  const [mood, setMood] = useState(GummyMood.Chilling);
+
+  useEffect(() => {
+  // setInterval(() => {
+  //   setMood(previousMood => {
+  //     const values = Object.values(GummyMood);
+  //     const index = values.indexOf(previousMood);
+  //
+  //     console.log(index + 1)
+  //     return values[index + 1]
+  //   })
+  // }, 1000)
+  }, []);
 
   const [totalSales, totalRevenue] = useMemo(() => {
     if (!products) {
@@ -63,6 +79,8 @@ export const DashboardPage = (): JSX.Element => {
         />
         <ActivitySection sales={sales} />
       </PageContentWrapper>
+
+      <GummyAvatar mood={mood}/>
     </PageWrapper>
   );
 };
