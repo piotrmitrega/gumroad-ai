@@ -5,6 +5,7 @@ export type GummyInsight = {
   messages: GummyMessage[];
   searchable: boolean;
   publicLabel?: string;
+  relatedItemId?: string;
 }
 
 export type GummyMessage = {

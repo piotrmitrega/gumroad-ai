@@ -1,5 +1,5 @@
 .speechBalloon {
-  text-align: center;
+  //text-align: center;
   letter-spacing: 2px;
   font-size: 15px;
   color: var(--text-primary-color);
@@ -7,10 +7,13 @@
   border:1px solid var(--border-color);
   padding: 1rem;
   min-width: 200px;
-  max-width: 300px;
+  max-width: 400px;
   width: max-content;
   border-radius: 11px;
   position: relative;
-  box-shadow: 10px 10px var(--gummy-color);
+  box-shadow: 0.5rem 0.5rem var(--gummy-color);
   min-height: 2rem;
+  white-space: pre-line;
+  max-height: 500px;
+  overflow: auto;
 }

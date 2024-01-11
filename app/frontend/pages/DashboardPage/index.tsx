@@ -1,14 +1,14 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { PageWrapper } from "../../components/layout/PageWrapper";
 import { HeaderWrapper } from "../../components/layout/HeaderWrapper";
 import { useFetchRequest } from "../../hooks/useFetchRequest";
 import { PageContentWrapper } from "../../components/layout/PageContentWrapper";
 import { Product, Sale } from "../../types/api";
-import { StatsSections } from "../../components/dashboard/././StatsSection";
 import { ProductsSection } from "../../components/dashboard/ProductsSection";
 import { ActivitySection } from "../../components/dashboard/ActivitySection";
 import { GummyAvatar } from "../../components/gummy/GummyAvatar";
-import { GummyMood } from "../../enums/gummyMood";
+import { StatsSections } from "../../components/dashboard/StatsSection";
+import { useDashboardAi } from "../../hooks/useDashboardAi";
 
 export const DashboardPage = (): JSX.Element => {
   const {
@@ -23,19 +23,9 @@ export const DashboardPage = (): JSX.Element => {
     isFetching: isFetchingSales
   } = useFetchRequest<Sale[]>("/api/sales");
 
-  const [mood, setMood] = useState(GummyMood.Chilling);
-
-  useEffect(() => {
-  // setInterval(() => {
-  //   setMood(previousMood => {
-  //     const values = Object.values(GummyMood);
-  //     const index = values.indexOf(previousMood);
-  //
-  //     console.log(index + 1)
-  //     return values[index + 1]
-  //   })
-  // }, 1000)
-  }, []);
+  const {
+    data: productImprovements,
+  } = useDashboardAi();
 
   const [totalSales, totalRevenue] = useMemo(() => {
     if (!products) {
@@ -76,11 +66,12 @@ export const DashboardPage = (): JSX.Element => {
           products={products}
           totalSales={totalSales}
           totalRevenue={totalRevenue}
+          productImprovements={productImprovements}
         />
         <ActivitySection sales={sales} />
       </PageContentWrapper>
 
-      <GummyAvatar mood={mood}/>
+      <GummyAvatar />
     </PageWrapper>
   );
 };

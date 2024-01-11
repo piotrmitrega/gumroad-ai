@@ -26,10 +26,11 @@ export const GummyInsights = ({}: GummyInsightsProps): JSX.Element => {
 
     const message = insight.messages[currentMessageIndex];
 
-    if (message.mood) {
+    if (message?.mood) {
       setMood(message.mood);
     }
   }, [insight, currentMessageIndex]);
+
   const onClick = useCallback(() => {
     if (currentMessageIndex >= insight.messages.length - 1) {
       console.log("Last message clicked, hiding");
@@ -40,11 +41,12 @@ export const GummyInsights = ({}: GummyInsightsProps): JSX.Element => {
     setCurrentMessageIndex(currentMessageIndex + 1);
   }, [insight, currentMessageIndex, setCurrentMessageIndex, hideInsight]);
 
-  if (!insight) {
+  const currentMessage = insight?.messages[currentMessageIndex];
+
+  if (!insight || !currentMessage) {
     return null;
   }
 
-  const currentMessage = insight.messages[currentMessageIndex];
 
   return (
     <SpeechBalloonWrapper

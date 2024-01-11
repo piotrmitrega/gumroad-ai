@@ -3,17 +3,22 @@ import { Product } from "../../../types/api";
 import styles from "./styles.module.scss";
 import { Icon } from "../../base/Icon";
 import { IconType } from "../../../enums/iconType";
+import { GummySuggestionAvailableButton } from "../../gummy/GummySuggestionAvailableButton";
+import { ProductImprovementsData } from "../../../types/ai";
+import { ProductRow } from "../ProductRow";
 
 export type ProductsSectionProps = {
   products: Product[];
   totalSales: number;
   totalRevenue: number;
+  productImprovements?: Record<string, ProductImprovementsData>
 }
 
 export const ProductsSection = ({
   products,
   totalRevenue,
-  totalSales
+  totalSales,
+  productImprovements
 }: ProductsSectionProps): JSX.Element => {
   return (
     <table className={styles.table}>
@@ -33,26 +38,10 @@ export const ProductsSection = ({
       <tbody>
 
       {products.map(product => {
+        const improvement = productImprovements?.[product.id];
+
         return (
-          <tr key={product.id}>
-            <td className={styles.thumbnailCell}>
-              {product.thumbnail_url ? (
-                <img className={styles.thumbnailImg} src={product.thumbnail_url} />
-              ) : (
-                <Icon iconType={IconType.Image} />
-              )}
-            </td>
-            <td>
-              <div>
-                <h4>{product.name}</h4>
-                <a className={styles.link} href={product.short_url}>{product.short_url}</a>
-              </div>
-            </td>
-            <td>{product.sales_count}</td>
-            <td>${product.sales_usd_cents / 100}</td>
-            <td>${product.price / 100}</td>
-            <td>{product.published ? "Published" : "Unpublished"}</td>
-          </tr>
+          <ProductRow key={product.id} product={product} productImprovements={improvement} />
         );
       })}
       </tbody>

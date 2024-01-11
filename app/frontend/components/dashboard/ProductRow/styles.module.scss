@@ -1,0 +1,26 @@
+.thumbnailCell {
+  width: 5rem;
+  position: relative;
+  border-right: 1px solid var(--border-color);
+  overflow: hidden;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.thumbnailImg {
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.link {
+  font-size: 14px;
+  color: var(--text-primary-color);
+  text-decoration: underline;
+}
+
+.highlighted {
+  box-shadow: var(--gummy-box-shadow-inner);
+}

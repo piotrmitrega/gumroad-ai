@@ -1,21 +1,19 @@
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes, useCallback } from "react";
 import classnames from "classnames";
-import styles from "./styles.module.scss";
 import { GummyMood } from "../../../enums/gummyMood";
-import { SpeechBalloonWrapper } from ".././SpeechBalloonWrapper";
 import { GummyInsights } from "../GummyInsights";
 import { useGummyContext } from "../../../contexts/GumyContext";
-
-export type GummyAvatarProps = HTMLAttributes<HTMLDivElement> & {
-  mood: GummyMood
-}
+import styles from "./styles.module.scss";
 
 export const GummyAvatar = (): JSX.Element => {
-  const { mood } = useGummyContext();
+  const { mood, hideInsight } = useGummyContext();
 
-  console.log("Gummy mood", mood)
+  const onClick = useCallback(() => {
+    hideInsight();
+  }, [hideInsight]);
+
   return (
-    <div className={styles.gummy}>
+    <div className={styles.gummy} onClick={onClick}>
       <div
         className={classnames(
           styles.chilling, mood === GummyMood.Chilling && styles.active

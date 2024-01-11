@@ -9,6 +9,7 @@ export enum IconType {
   DollarOutline = 'dollarOutline',
   Envelope = 'envelope',
   Image = 'image',
+  Lighting = 'lighting',
   Search = 'search',
   Settings = 'settings',
   Shop = 'shop',

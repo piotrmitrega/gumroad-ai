@@ -1,5 +1,8 @@
 import { GummyInsight } from "../types/gummy";
 import { GummyMood } from "../enums/gummyMood";
+import { ProductImprovementsData } from "../types/ai";
+import { Product } from "../types/api";
+import { stringifyProductImprovementItem } from "../utils/stringifyProductImprovementItem";
 
 export const WelcomeGummyInsight: GummyInsight = {
   name: "welcome",
@@ -27,11 +30,24 @@ export const AnalyzingDataGummyInsights: GummyInsight = {
   }]
 };
 
-export const create: GummyInsight = {
-  name: "product-description",
-  searchable: false,
-  messages: [{
-    content: "I had a closer look to your products. May I suggest something?",
-    mood: GummyMood.Grinning
-  }]
+export const createProductImprovementsInsight = (
+  product: Product,
+  improvementsData: ProductImprovementsData
+): GummyInsight => {
+  const {
+    tags,
+    description
+  } = improvementsData;
+
+  return {
+    name: "product-improvement",
+    publicLabel: `Improvements for product ${product.name}`,
+    relatedItemId: product.id,
+    searchable: true,
+    messages: [{
+      content: `${stringifyProductImprovementItem(description)}\n\n${stringifyProductImprovementItem(tags)}`,
+      mood: GummyMood.Concerned,
+      skippable: false
+    }]
+  };
 };
