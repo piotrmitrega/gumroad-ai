@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback } from "react";
+import React, { useCallback } from "react";
 import classnames from "classnames";
 import { GummyMood } from "../../../enums/gummyMood";
 import { GummyInsights } from "../GummyInsights";

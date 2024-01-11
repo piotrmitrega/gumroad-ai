@@ -1,4 +1,4 @@
-import { ProductImprovementItem, ProductImprovementsData } from "../types/ai";
+import { ProductImprovementItem } from "../types/ai";
 
 export const stringifyProductImprovementItem = (improvement: ProductImprovementItem) => {
   if (!improvement.needsChanges) {

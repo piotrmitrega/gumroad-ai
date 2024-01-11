@@ -1,9 +1,6 @@
 import React from "react";
 import { Product } from "../../../types/api";
 import styles from "./styles.module.scss";
-import { Icon } from "../../base/Icon";
-import { IconType } from "../../../enums/iconType";
-import { GummySuggestionAvailableButton } from "../../gummy/GummySuggestionAvailableButton";
 import { ProductImprovementsData } from "../../../types/ai";
 import { ProductRow } from "../ProductRow";
 
