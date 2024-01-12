@@ -33,6 +33,7 @@ export const GummyInsights = ({}: GummyInsightsProps): JSX.Element => {
 
   const onClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
+    e.preventDefault();
 
     if (!insight?.messages[currentMessageIndex]) {
       return;
