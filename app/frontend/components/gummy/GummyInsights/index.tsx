@@ -31,8 +31,14 @@ export const GummyInsights = ({}: GummyInsightsProps): JSX.Element => {
     }
   }, [insight, currentMessageIndex]);
 
-  const onClick = useCallback(() => {
-    if (currentMessageIndex >= insight.messages.length - 1) {
+  const onClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+
+    if (!insight?.messages[currentMessageIndex]) {
+      return;
+    }
+
+    if (currentMessageIndex >= insight?.messages.length - 1) {
       console.log("Last message clicked, hiding");
       hideInsight();
       return;
@@ -46,7 +52,6 @@ export const GummyInsights = ({}: GummyInsightsProps): JSX.Element => {
   if (!insight || !currentMessage) {
     return null;
   }
-
 
   return (
     <SpeechBalloonWrapper

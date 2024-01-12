@@ -24,27 +24,27 @@
 
 .chilling {
   @extend %inner;
-  background-image: url('gummy-chilling.png');
+  background-image: url('../../../images/gummy-chilling.png');
 }
 
 .concerned {
   @extend %inner;
-  background-image: url('gummy-concerned.png');
+  background-image: url('../../../images/gummy-concerned.png');
 }
 
 .grinning {
   @extend %inner;
-  background-image: url('gummy-grinning.png');
+  background-image: url('../../../images/gummy-grinning.png');
 }
 
 .sad {
   @extend %inner;
-  background-image: url('gummy-sad.png');
+  background-image: url('../../../images/gummy-sad.png');
 }
 
 .smiling {
   @extend %inner;
-  background-image: url('gummy-smiling.png');
+  background-image: url('../../../images/gummy-smiling.png');
 }
 
 .active {
