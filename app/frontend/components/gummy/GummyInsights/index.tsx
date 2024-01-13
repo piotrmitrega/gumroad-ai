@@ -35,7 +35,8 @@ export const GummyInsights = ({}: GummyInsightsProps): JSX.Element => {
     e.stopPropagation();
     e.preventDefault();
 
-    if (!insight?.messages[currentMessageIndex]) {
+    const message = insight?.messages[currentMessageIndex];
+    if (!message || !message.skippable) {
       return;
     }
 
@@ -57,7 +58,7 @@ export const GummyInsights = ({}: GummyInsightsProps): JSX.Element => {
   return (
     <SpeechBalloonWrapper
       className={classnames(styles.balloon, currentMessage.skippable && styles.clickable)}
-      onClick={currentMessage.skippable ? onClick : null}
+      onClick={onClick}
     >
       {currentMessage.content}
     </SpeechBalloonWrapper>
