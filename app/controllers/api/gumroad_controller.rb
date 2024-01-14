@@ -19,6 +19,12 @@ class Api::GumroadController < ApplicationController
   private
 
   def set_gumroad_service
-    @gumroad_service = GumroadService.new(ENV['GUMROAD_ACCESS_TOKEN'])
+    unless logged_in?
+      Rails.logger.info "Access attempt without login"
+      head :unauthorized and return
+    end
+
+    token = @current_user.gumroad_token
+    @gumroad_service = GumroadService.new(token)
   end
 end

@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     get 'user', to: 'gumroad#user'
   end
 
+  get '/auth/:provider/callback', to: 'sessions#create'
+
+  get '/logout', to: 'sessions#destroy'
+
   # Redirect all other routes back to front-end React application
   # If we don't do this, refreshing the page will break as Rails will not know
   # how to redirect back to React SPA.

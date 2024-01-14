@@ -1,5 +1,5 @@
 class HomepageController < ApplicationController
   def index
-    p "homepageee"
+    puts ENV['GUMROAD_APP_ID'], ENV['GUMROAD_APP_SECRET']
   end
 end
