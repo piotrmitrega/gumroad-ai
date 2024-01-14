@@ -12,4 +12,11 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !!current_user
   end
+
+  def authenticate_user!
+    unless logged_in?
+      Rails.logger.warn "Unauthorized"
+      head :unauthorized and return
+    end
+  end
 end

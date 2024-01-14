@@ -1,4 +1,5 @@
 class Api::GumroadController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_gumroad_service
 
   def products
@@ -19,11 +20,6 @@ class Api::GumroadController < ApplicationController
   private
 
   def set_gumroad_service
-    unless logged_in?
-      Rails.logger.info "Access attempt without login"
-      head :unauthorized and return
-    end
-
     token = @current_user.gumroad_token
     @gumroad_service = GumroadService.new(token)
   end

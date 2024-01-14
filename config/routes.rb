@@ -14,15 +14,14 @@ Rails.application.routes.draw do
     get 'products', to: 'gumroad#products'
     get 'sales', to: 'gumroad#sales'
     get 'user', to: 'gumroad#user'
+
   end
 
-  get '/auth/:provider/callback', to: 'sessions#create'
+  get '/logout', to: 'api/sessions#destroy', as: 'logout'
 
-  get '/logout', to: 'sessions#destroy'
+  get '/auth/:provider/callback', to: 'api/sessions#create'
 
-  # Redirect all other routes back to front-end React application
-  # If we don't do this, refreshing the page will break as Rails will not know
-  # how to redirect back to React SPA.
+  # Redirect all other routes back to React SPA
   get '*path', to: "homepage#index", constraints: ->(request) do
     !request.xhr? && request.format.html?
   end

@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class Api::SessionsController < ApplicationController
   def create
     auth = request.env['omniauth.auth']
     user_info = auth.extra.raw_info.user
@@ -12,13 +12,16 @@ class SessionsController < ApplicationController
       u.name = user_info.name
     end
 
+    SlackService.send_message("User #{user.name} (#{user.email}) has logged in")
+
     session[:user_id] = user.id
 
     redirect_to root_path, notice: 'Signed in successfully.'
   end
 
   def destroy
-    session[:user_id] = nil
-    # Redirect to login page or homepage
+    Rails.logger.info "Logging out..."
+    reset_session
+    redirect_to login_path, notice: 'You have been logged out.'
   end
 end

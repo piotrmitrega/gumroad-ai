@@ -14,7 +14,6 @@ export const useDashboardAi = (): UseDashboardAiValue => {
   // fetch
   useEffectAsync(async () => {
     const time = Math.random() * 3000;
-    console.log('time', time)
       await new Promise<void>((resolve) => setTimeout(() => resolve(), Math.random() * 3000));
 
       setFetching(false);

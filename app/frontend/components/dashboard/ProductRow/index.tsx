@@ -7,6 +7,7 @@ import { GummySuggestionAvailableButton } from "../../gummy/GummySuggestionAvail
 import { useGummyContext } from "../../../contexts/GumyContext";
 import { createProductImprovementsInsight } from "../../../consts/gummy";
 import styles from "./styles.module.scss";
+import classnames from "classnames";
 
 export type ProductRowProps = {
   product: Product;
@@ -34,7 +35,7 @@ export const ProductRow = ({
   }, [isActive, product, productImprovements]);
 
   return (
-    <tr key={product.id} className={isActive && styles.highlighted}>
+    <tr key={product.id} className={classnames(isActive && styles.highlighted)}>
       <td className={styles.thumbnailCell}>
         {product.thumbnail_url ? (
           <img className={styles.thumbnailImg} src={product.thumbnail_url} />
@@ -51,9 +52,10 @@ export const ProductRow = ({
       <td>{product.sales_count}</td>
       <td>${product.sales_usd_cents / 100}</td>
       <td>${product.price / 100}</td>
-      <td>{product.published ? "Published" : "Unpublished"}</td>
-
-      {Boolean(productImprovements) && <GummySuggestionAvailableButton onClick={onClick} />}
+      <td>
+        {product.published ? "Published" : "Unpublished"}
+        {Boolean(productImprovements) && <GummySuggestionAvailableButton onClick={onClick} />}
+      </td>
     </tr>
   );
 };
