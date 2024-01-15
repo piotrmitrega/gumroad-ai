@@ -1,3 +1,5 @@
+import classnames from "classnames";
+
 export type Product = {
   name: string;
   preview_url: string | null;
@@ -98,4 +100,12 @@ export type Sale = {
   license_disabled: boolean;
   is_multiseat_license: boolean;
   quantity: number;
+}
+
+export type User = {
+  id: string;
+  gumroad_id: string;
+  name: string;
+  email: string;
+  profile_url: string;
 }

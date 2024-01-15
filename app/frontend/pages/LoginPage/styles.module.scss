@@ -1,0 +1,108 @@
+.page {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  overflow: auto;
+}
+
+.form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+  gap: 4rem;
+
+
+  @media screen and (max-width: 1024px) {
+    padding: 1rem;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.linkedinLink {
+  transition: all 150ms ease-in-out;
+
+  &:visited {
+    color: white;
+  }
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.linkedin {
+  width: 2em;
+  height: 2em;
+  mask-size: 100%;
+}
+
+.button {
+  padding: 0.75rem 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  outline: none;
+  box-shadow: none;
+  display: inline-flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  font-family: inherit;
+  font-size: 1em;
+  border: 1px solid var(--border-color);
+  transition: all 140ms ease-out;
+  margin-top: auto;
+
+  &:hover {
+    transform: translate(-0.25rem, -0.25rem);
+    box-shadow: .25rem .25rem 0rem white;
+    background-color: var(--accent-color);
+    border: 1px solid #f3a9e2;
+  }
+}
+
+.gummySection {
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+}
+
+.balloon {
+  position: relative;
+  left: 0;
+  max-width: min(300px, 30vw);
+  margin-right: min(3rem, 5vw);
+}
+
+.avatars {
+  position: relative;
+  width: 40vw;
+
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+
+  img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.name {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.logo {
+  width: calc(7.14286em);
+}

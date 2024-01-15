@@ -6,9 +6,9 @@ import { PageContentWrapper } from "../../components/layout/PageContentWrapper";
 import { Product, Sale } from "../../types/api";
 import { ProductsSection } from "../../components/dashboard/ProductsSection";
 import { ActivitySection } from "../../components/dashboard/ActivitySection";
-import { GummyAvatar } from "../../components/gummy/GummyAvatar";
 import { StatsSections } from "../../components/dashboard/StatsSection";
 import { useDashboardAi } from "../../hooks/useDashboardAi";
+import { GummyAvatarContainer } from "../../components/gummy/GummyAvatarContainer";
 
 export const DashboardPage = (): JSX.Element => {
   const {
@@ -71,7 +71,7 @@ export const DashboardPage = (): JSX.Element => {
         <ActivitySection sales={sales} />
       </PageContentWrapper>
 
-      <GummyAvatar />
+      <GummyAvatarContainer />
     </PageWrapper>
   );
 };

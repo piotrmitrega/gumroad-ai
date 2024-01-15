@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_13_232636) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_14_222854) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "gumroad_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_232636) do
     t.string "gumroad_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "profile_url"
   end
 
 end

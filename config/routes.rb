@@ -13,11 +13,10 @@ Rails.application.routes.draw do
   namespace :api do
     get 'products', to: 'gumroad#products'
     get 'sales', to: 'gumroad#sales'
-    get 'user', to: 'gumroad#user'
-
+    get 'me', to: 'users#me'
   end
 
-  get '/logout', to: 'api/sessions#destroy', as: 'logout'
+  delete '/logout', to: 'api/sessions#destroy', as: 'logout'
 
   get '/auth/:provider/callback', to: 'api/sessions#create'
 

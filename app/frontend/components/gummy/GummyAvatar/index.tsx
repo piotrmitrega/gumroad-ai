@@ -1,19 +1,20 @@
-import React, { useCallback } from "react";
+import React, { HTMLAttributes } from "react";
 import classnames from "classnames";
 import { GummyMood } from "../../../enums/gummyMood";
-import { GummyInsights } from "../GummyInsights";
-import { useGummyContext } from "../../../contexts/GumyContext";
 import styles from "./styles.module.scss";
 
-export const GummyAvatar = (): JSX.Element => {
-  const { mood, hideInsight } = useGummyContext();
+export type GummyAvatarProps = HTMLAttributes<HTMLDivElement> & {
+  mood: GummyMood
+}
 
-  const onClick = useCallback(() => {
-    hideInsight();
-  }, [hideInsight]);
-
+export const GummyAvatar = ({
+  className,
+  children,
+  mood,
+  ...baseProps
+}: GummyAvatarProps): JSX.Element => {
   return (
-    <div className={styles.gummy} onClick={onClick}>
+    <div className={classnames(styles.gummy, className)} {...baseProps}>
       <div
         className={classnames(
           styles.chilling, mood === GummyMood.Chilling && styles.active
@@ -40,7 +41,7 @@ export const GummyAvatar = (): JSX.Element => {
         )}
       />
 
-      <GummyInsights />
+      {children}
     </div>
   );
 };

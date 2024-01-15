@@ -1,71 +1,90 @@
-import React from "react";
+import React, { useCallback } from "react";
+import classnames from "classnames";
 import { useLocation } from "react-router-dom";
-import { NavLink } from "../NavLink";
+import { NavLinkWithIcon } from "../NavLinkWithIcon";
 import { IconType } from "../../../enums/iconType";
 import { RoutePath } from "../../../enums/routePath";
+import { NavLink } from "../NavLink";
+import { useUserContext } from "../../../contexts/UserContext";
+import { Logo } from "../../base/Logo";
+import gummyChillingPath from "../../../images/gummy-chilling.png";
+
 import styles from "./styles.module.scss";
+import { useRequest } from "../../../hooks/useRequest";
 
 export const Navbar = (): JSX.Element => {
   const { pathname } = useLocation();
+  const { user } = useUserContext();
+
+  const { request } = useRequest();
+
+  const onLogout = useCallback(async () => {
+    await request("/logout", { method: "delete" });
+    window.location.href = RoutePath.Login;
+  }, [request]);
 
   return (
     <nav className={styles.navbar}>
       <a className={styles.logoLink} href={RoutePath.Dashboard}>
-        <div className={styles.logo} />
+        <Logo />
       </a>
 
-      <section className={styles.navSection}>
-        <NavLink
+      <section className={classnames(styles.navSection, styles.withMargin)}>
+        <NavLinkWithIcon
           to={RoutePath.Dashboard}
           isActive={pathname === RoutePath.Dashboard}
           iconType={IconType.Shop}
         >
           Home
-        </NavLink>
-        <NavLink
+        </NavLinkWithIcon>
+        <NavLinkWithIcon
           to={RoutePath.Products}
           isActive={pathname === RoutePath.Products}
           iconType={IconType.Archive}
         >
           Products
-        </NavLink>
-        <NavLink disabled iconType={IconType.Cart}>
+        </NavLinkWithIcon>
+        <NavLinkWithIcon disabled iconType={IconType.Cart}>
           Checkout
-        </NavLink>
-        <NavLink disabled iconType={IconType.Envelope}>
+        </NavLinkWithIcon>
+        <NavLinkWithIcon disabled iconType={IconType.Envelope}>
           Emails
-        </NavLink>
-        <NavLink disabled iconType={IconType.Diagram}>
+        </NavLinkWithIcon>
+        <NavLinkWithIcon disabled iconType={IconType.Diagram}>
           Workflows
-        </NavLink>
-        <NavLink disabled iconType={IconType.Dollar}>
+        </NavLinkWithIcon>
+        <NavLinkWithIcon disabled iconType={IconType.Dollar}>
           Sales
-        </NavLink>
-        <NavLink disabled iconType={IconType.BarChart}>
+        </NavLinkWithIcon>
+        <NavLinkWithIcon disabled iconType={IconType.BarChart}>
           Analytics
-        </NavLink>
+        </NavLinkWithIcon>
       </section>
 
-      <section className={styles.navSection}>
-        <NavLink disabled iconType={IconType.Dollar}>
+      <section className={classnames(styles.navSection, styles.withMargin)}>
+        <NavLinkWithIcon disabled iconType={IconType.Dollar}>
           Payouts
-        </NavLink>
-        <NavLink disabled iconType={IconType.Search}>
+        </NavLinkWithIcon>
+        <NavLinkWithIcon disabled iconType={IconType.Search}>
           Discover
-        </NavLink>
-        <NavLink disabled iconType={IconType.Bookmark}>
+        </NavLinkWithIcon>
+        <NavLinkWithIcon disabled iconType={IconType.Bookmark}>
           Library
-        </NavLink>
+        </NavLinkWithIcon>
       </section>
 
       <section className={styles.navSection}>
-        <NavLink disabled iconType={IconType.BookOpen}>
+        <NavLinkWithIcon disabled iconType={IconType.BookOpen}>
           Help
-        </NavLink>
-        <NavLink disabled iconType={IconType.Settings}>
+        </NavLinkWithIcon>
+        <NavLinkWithIcon disabled iconType={IconType.Settings}>
           Settings
-        </NavLink>
+        </NavLinkWithIcon>
       </section>
+
+      <NavLink className={styles.userInfo} onClick={onLogout}>
+        <img className={styles.userPhoto} src={user.profile_url || gummyChillingPath} />{user.name}
+      </NavLink>
     </nav>
   );
 };

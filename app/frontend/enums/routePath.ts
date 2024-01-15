@@ -1,4 +1,5 @@
 export enum RoutePath {
   Dashboard = '/dashboard',
-  Products = '/products'
+  Products = '/products',
+  Login = '/login'
 }

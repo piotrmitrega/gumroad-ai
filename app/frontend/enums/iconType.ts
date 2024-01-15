@@ -10,6 +10,7 @@ export enum IconType {
   Envelope = 'envelope',
   Image = 'image',
   Lighting = 'lighting',
+  LinkedIn = 'linkedin',
   Search = 'search',
   Settings = 'settings',
   Shop = 'shop',

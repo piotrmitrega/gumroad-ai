@@ -14,12 +14,7 @@ root.render(
   <React.StrictMode>
     <ThemeProvider>
       <BrowserRouter>
-        <GummyContextProvider>
-          <AppLayoutWrapper>
-            <Navbar />
-            <AppRoutes />
-          </AppLayoutWrapper>
-        </GummyContextProvider>
+        <AppRoutes />
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>

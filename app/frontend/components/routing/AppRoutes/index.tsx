@@ -1,20 +1,17 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { RoutePath } from "../../../enums/routePath";
-import { DashboardPage } from "../../../pages/DashboardPage";
-import { ProductsPage } from "../../../pages/ProductsPage";
+import { ProtectedAppRoutes } from "../ProtectedAppRoutes";
+import { LoginPage } from "../../../pages/LoginPage";
 
 export const AppRoutes = (): JSX.Element => {
   return (
     <Switch>
-      <Route path={RoutePath.Dashboard}>
-        <DashboardPage />
+      <Route path={RoutePath.Login}>
+        <LoginPage />
       </Route>
-      <Route path={RoutePath.Products} >
-        <ProductsPage />
-      </Route>
-      <Route>
-        <Redirect to={RoutePath.Dashboard} />
+      <Route >
+        <ProtectedAppRoutes />
       </Route>
     </Switch>
   );
