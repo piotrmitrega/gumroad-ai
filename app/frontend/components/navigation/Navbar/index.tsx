@@ -37,11 +37,7 @@ export const Navbar = (): JSX.Element => {
         >
           Home
         </NavLinkWithIcon>
-        <NavLinkWithIcon
-          to={RoutePath.Products}
-          isActive={pathname === RoutePath.Products}
-          iconType={IconType.Archive}
-        >
+        <NavLinkWithIcon disabled iconType={IconType.Archive}>
           Products
         </NavLinkWithIcon>
         <NavLinkWithIcon disabled iconType={IconType.Cart}>

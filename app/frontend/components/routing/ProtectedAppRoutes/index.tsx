@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { RoutePath } from "../../../enums/routePath";
 import { DashboardPage } from "../../../pages/DashboardPage";
-import { ProductsPage } from "../../../pages/ProductsPage";
 import { useFetchRequest } from "../../../hooks/useFetchRequest";
 import { User } from "../../../types/api";
 import { Navbar } from "../../navigation/Navbar";
@@ -33,9 +32,6 @@ export const ProtectedAppRoutes = (): JSX.Element => {
           <Switch>
             <Route path={RoutePath.Dashboard}>
               <DashboardPage />
-            </Route>
-            <Route path={RoutePath.Products}>
-              <ProductsPage />
             </Route>
             <Route>
               <Redirect to={RoutePath.Dashboard} />
