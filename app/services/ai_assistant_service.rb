@@ -16,8 +16,8 @@ class AiAssistantService
     end
 
     messages = [
-      { role: 'system', content: get_product_metadata_llm_system_message(product) },
-      { role: 'user', content: get_product_metadata_llm_user_message },
+      { role: 'system', content: ProductMetadata.get_system_message(product) },
+      { role: 'user', content: ProductMetadata.get_user_message },
     ]
 
     Rails.logger.info "Generating response for the product #{id} and following messages #{messages.to_json}"
