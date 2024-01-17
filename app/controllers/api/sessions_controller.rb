@@ -14,9 +14,20 @@ module Api
       user.name = user_info.name if user.name.blank?
       user.profile_url = user_info.profile_url if user.profile_url.blank?
 
-      SlackService.send_message("User #{user.name} (#{user.email}) has logged in")
-      session[:user_id] = user.id
-      redirect_to root_path
+
+      if user.save
+        message = "User #{user.name} (#{user.email}) has logged in";
+
+        Rails.logger.info message
+        SlackService.send_message(message)
+
+        session[:user_id] = user.id
+
+        redirect_to root_path
+      else
+        Rails.logger.error "User could not be saved: #{user.errors.full_messages.join(", ")}"
+        redirect_to login_path
+      end
     end
 
     def destroy
