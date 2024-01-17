@@ -14,7 +14,7 @@ class GumroadService
       body: { access_token: @access_token }
     });
 
-    if response.success?
+    if response.success? && response.body.success?
       JSON.parse(response.body)['user']
     else
       raise "Failed to fetch Gumroad user: #{response.code}"
@@ -26,10 +26,22 @@ class GumroadService
       body: { access_token: @access_token }
     });
 
-    if response.success?
+    if response.success? && response.body['success']
       JSON.parse(response.body)['products']
     else
-      raise "Failed to fetch Gumroad products: #{response.code}"
+      raise "Failed to fetch Gumroad products: : #{response.code} \n #{response.body}"
+    end
+  end
+
+  def get_product(productId)
+    response = self.class.get("/products/#{productId}", {
+      body: { access_token: @access_token }
+    })
+
+    if response.success? && response.body['success']
+      JSON.parse(response.body)['product']
+    else
+      raise "Failed to fetch Gumroad product (#{productId}): #{response.code} \n #{response.body}"
     end
   end
 
@@ -38,10 +50,10 @@ class GumroadService
       body: { access_token: @access_token }
     });
 
-    if response.success?
+    if response.success? && response.body['success']
       JSON.parse(response.body)['sales']
     else
-      raise "Failed to fetch Gumroad sales: #{response.code}"
+      raise "Failed to fetch Gumroad sales: : #{response.code} \n #{response.body}"
     end
   end
 

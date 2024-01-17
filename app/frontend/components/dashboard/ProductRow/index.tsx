@@ -1,41 +1,20 @@
-import React, { useCallback } from "react";
+import React, { HTMLAttributes } from "react";
 import { Product } from "../../../types/api";
-import { ProductImprovementsData } from "../../../types/ai";
 import { Icon } from "../../base/Icon";
 import { IconType } from "../../../enums/iconType";
-import { GummySuggestionAvailableButton } from "../../gummy/GummySuggestionAvailableButton";
-import { useGummyContext } from "../../../contexts/GumyContext";
-import { createProductImprovementsInsight } from "../../../consts/gummy";
 import styles from "./styles.module.scss";
-import classnames from "classnames";
 
-export type ProductRowProps = {
+export type ProductRowProps = HTMLAttributes<HTMLTableRowElement> & {
   product: Product;
-  productImprovements: ProductImprovementsData;
 }
 
 export const ProductRow = ({
-  productImprovements,
-  product
+  product,
+    children,
+  ...baseProps
 }: ProductRowProps): JSX.Element => {
-  const {
-    insight,
-    setInsight,
-    hideInsight
-  } = useGummyContext();
-
-  const isActive = insight?.relatedItemId === product.id;
-
-  const onClick = useCallback(() => {
-    if (isActive) {
-      hideInsight();
-    } else {
-      setInsight(createProductImprovementsInsight(product, productImprovements));
-    }
-  }, [isActive, product, productImprovements]);
-
   return (
-    <tr key={product.id} className={classnames(isActive && styles.highlighted)}>
+    <tr key={product.id} {...baseProps}>
       <td className={styles.thumbnailCell}>
         {product.thumbnail_url ? (
           <img className={styles.thumbnailImg} src={product.thumbnail_url} />
@@ -54,7 +33,7 @@ export const ProductRow = ({
       <td>${product.price / 100}</td>
       <td>
         {product.published ? "Published" : "Unpublished"}
-        {Boolean(productImprovements) && <GummySuggestionAvailableButton onClick={onClick} />}
+        {children}
       </td>
     </tr>
   );

@@ -14,6 +14,11 @@ Rails.application.routes.draw do
     get 'products', to: 'gumroad#products'
     get 'sales', to: 'gumroad#sales'
     get 'me', to: 'users#me'
+
+    namespace :ai do
+      get 'product/new', to: 'ai_assistant#new_productt'
+      get 'product/:productId', to: 'ai_assistant#product'
+    end
   end
 
   delete '/logout', to: 'api/sessions#destroy', as: 'logout'

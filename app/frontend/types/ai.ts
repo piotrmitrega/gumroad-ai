@@ -1,5 +1,4 @@
 export type ProductImprovementItem = {
-  needsChanges: boolean;
   overview: string;
   suggestions: string[];
 }

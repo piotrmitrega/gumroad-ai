@@ -8,7 +8,11 @@ export const WelcomeGummyInsight: GummyInsight = {
   name: "welcome",
   searchable: false,
   messages: [{
-    content: "Hi there! I'm Gummy, your best personal advisor.",
+    content: `Hello! I'm Gummy, your dedicated personal advisor.
+     
+     First of all, I deeply appreciate the effort and creativity you've put into your products.
+     
+     If you don't mind, I'll review some of them to ensure their accuracy and persuasive appeal. My goal is to enhance their potential to attract and engage users effectively, complementing the hard work you've already invested.`,
     mood: GummyMood.Chilling,
     skippable: true
   }, {

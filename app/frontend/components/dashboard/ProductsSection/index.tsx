@@ -3,20 +3,22 @@ import { Product } from "../../../types/api";
 import styles from "./styles.module.scss";
 import { ProductImprovementsData } from "../../../types/ai";
 import { ProductRow } from "../ProductRow";
+import { chooseProductIdsToAnalyze } from "../../../utils/chooseProductIdsToAnalyze";
+import { ProductRowWithAi } from "../ProductRowWithAi";
 
 export type ProductsSectionProps = {
   products: Product[];
   totalSales: number;
   totalRevenue: number;
-  productImprovements?: Record<string, ProductImprovementsData>
 }
 
 export const ProductsSection = ({
   products,
   totalRevenue,
-  totalSales,
-  productImprovements
+  totalSales
 }: ProductsSectionProps): JSX.Element => {
+  const productsToAnalyze = chooseProductIdsToAnalyze(products);
+
   return (
     <table className={styles.table}>
       <caption>Products</caption>
@@ -35,12 +37,13 @@ export const ProductsSection = ({
       <tbody>
 
       {products.map(product => {
-        const improvement = productImprovements?.[product.id];
-
-        return (
-          <ProductRow key={product.id} product={product} productImprovements={improvement} />
-        );
-      })}
+          return productsToAnalyze.includes(product.id) ? (
+            <ProductRowWithAi key={product.id} product={product} />
+          ) : (
+            <ProductRow key={product.id} product={product} />
+          );
+        }
+      )}
       </tbody>
 
       <tfoot>

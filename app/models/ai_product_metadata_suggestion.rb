@@ -1,0 +1,2 @@
+class AiProductMetadataSuggestion < ApplicationRecord
+end

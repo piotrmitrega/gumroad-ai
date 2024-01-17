@@ -11,11 +11,9 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
-    <ThemeProvider>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
-    </ThemeProvider>
-  </React.StrictMode>
+  <ThemeProvider>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  </ThemeProvider>
 );

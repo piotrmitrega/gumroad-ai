@@ -7,7 +7,6 @@ import { Product, Sale } from "../../types/api";
 import { ProductsSection } from "../../components/dashboard/ProductsSection";
 import { ActivitySection } from "../../components/dashboard/ActivitySection";
 import { StatsSections } from "../../components/dashboard/StatsSection";
-import { useDashboardAi } from "../../hooks/useDashboardAi";
 import { GummyAvatarContainer } from "../../components/gummy/GummyAvatarContainer";
 
 export const DashboardPage = (): JSX.Element => {
@@ -22,10 +21,6 @@ export const DashboardPage = (): JSX.Element => {
     isError: isSalesError,
     isFetching: isFetchingSales
   } = useFetchRequest<Sale[]>("/api/sales");
-
-  const {
-    data: productImprovements,
-  } = useDashboardAi();
 
   const [totalSales, totalRevenue] = useMemo(() => {
     if (!products) {
@@ -66,7 +61,6 @@ export const DashboardPage = (): JSX.Element => {
           products={products}
           totalSales={totalSales}
           totalRevenue={totalRevenue}
-          productImprovements={productImprovements}
         />
         <ActivitySection sales={sales} />
       </PageContentWrapper>
