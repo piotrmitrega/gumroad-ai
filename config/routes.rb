@@ -17,7 +17,8 @@ Rails.application.routes.draw do
 
     namespace :ai do
       get 'product/new', to: 'ai_assistant#new_productt'
-      get 'product/:productId', to: 'ai_assistant#product'
+      get 'product/:productId/suggestion', to: 'ai_assistant#product_suggestion'
+      get 'product/:productId/rewrite', to: 'ai_assistant#product_rewrite'
     end
   end
 

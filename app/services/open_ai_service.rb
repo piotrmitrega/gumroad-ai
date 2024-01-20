@@ -6,19 +6,19 @@ class OpenAiService
     @access_token = access_token
   end
 
-  def generate_text(messages)
+  def chat_completion(messages)
     headers = {
       "Content-Type" => "application/json",
       "Authorization" => "Bearer #{@access_token}"
     }
 
     body = {
-      model: "gpt-3.5-turbo", # Specify the model you want to use
+      model: "gpt-3.5-turbo",
       messages: messages
     }.to_json
 
     response = self.class.post(
-      '/chat/completions', # Adjust the endpoint path as needed
+      '/chat/completions',
       headers: headers,
       body: body
     )

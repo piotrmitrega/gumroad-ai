@@ -1,9 +1,14 @@
 .balloon {
   position: relative;
   left: -2rem;
-  transform: translateX(-100%)
+  transform: translateX(-100%);
+  box-sizing: border-box;
 }
 
 .clickable {
   cursor: pointer;
+}
+
+.fullScreen {
+  max-width: calc(100vw - 84px - 6rem);
 }

@@ -1,4 +1,4 @@
-module ProductMetadata
+module ProductMetadataSuggestion
   def self.get_system_message(product)
     "You are an assistant analyzing a product being sold on Gumroad. Please note that there might be images or videos embedded in the description that you are not aware of, so do not provide suggestions about adding images/videos. When providing feedback, please be specific in your suggestions and limit them to at most 5 for both items (description and tags). Provide your feedback in the following format. Json object must be the only thing you return. Here is an example response:
 

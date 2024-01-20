@@ -5,12 +5,20 @@ module Api
       before_action :set_assistant_service
       before_action :set_gumroad_service
 
-      def product
+      def product_suggestion
         product_id = params[:productId]
 
         product = @gumroad_service.get_product(product_id)
         products = @assistant_service.get_product_suggestion(product)
         render json: products
+      end
+
+      def product_rewrite
+        product_id = params[:productId]
+
+        product = @gumroad_service.get_product(product_id)
+        description = @assistant_service.apply_product_suggestion(product)
+        render json: { description: description }
       end
 
       def new_product
