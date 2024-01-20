@@ -20,7 +20,9 @@ export const WelcomeGummyInsight: GummyInsight = {
     content: "I'll do my best to boost your sales and enhance your products.",
     skippable: true
   }, {
-    content: "We're in this together!",
+    content: `We're in this together! 
+    
+    Give me a few minutes and I will let you know when I am done analyzing!`,
     skippable: true,
     mood: GummyMood.Smiling
   }]
