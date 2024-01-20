@@ -8,7 +8,7 @@ export type UseRequestResult<TResponse> = {
 export const useRequest = <TResponse>(): UseRequestResult<TResponse> => {
   const [isFetching, setFetching] = useState(false);
 
-  const request =  useCallback(async (input: RequestInfo | URL, init?: RequestInit) => {
+  const request = useCallback(async (input: RequestInfo | URL, init?: RequestInit) => {
     let response: Response;
     let json: any;
 
@@ -19,19 +19,21 @@ export const useRequest = <TResponse>(): UseRequestResult<TResponse> => {
         ...(init || {})
       };
 
-      if(init?.body && typeof init?.body !== 'string') {
-        finalInit.body = JSON.stringify(init.body)
+      if (init?.body && typeof init?.body !== "string") {
+        finalInit.body = JSON.stringify(init.body);
       }
 
       response = await fetch(input, finalInit);
     } catch (error) {
-      setFetching(false)
+      setFetching(false);
       throw new Error(`Could not fetch: ${input}. Error: ${error}`);
     }
 
-
     try {
-      json = await response.json();
+      const contentLength = response.headers.get("Content-Length");
+      if (contentLength && parseInt(contentLength, 10) > 0) {
+        json = await response.json();
+      }
     } catch (error) {
       setFetching(false);
       throw new Error(`Could not parse response: ${input}. Error: ${error}`);
@@ -49,5 +51,5 @@ export const useRequest = <TResponse>(): UseRequestResult<TResponse> => {
   return {
     request,
     isFetching
-  }
+  };
 };

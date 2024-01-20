@@ -4,11 +4,9 @@ import { GummySuggestionAvailableButton } from "../../gummy/GummySuggestionAvail
 import { useGummyContext } from "../../../contexts/GumyContext";
 import { createProductImprovementsInsight } from "../../../consts/gummy";
 import classnames from "classnames";
-import { useFetchRequest } from "../../../hooks/useFetchRequest";
+import { usePollRequest } from "../../../hooks/usePollRequest";
 import { ProductRow, ProductRowProps } from "../ProductRow";
 import styles from "./styles.module.scss";
-import { useRequest } from "../../../hooks/useRequest";
-import { useEffectAsync } from "../../../hooks/useEffectAsync";
 
 export type ProductRowWithAiProps = ProductRowProps;
 
@@ -21,21 +19,14 @@ export const ProductRowWithAi = ({
     hideInsight
   } = useGummyContext();
 
-  const { data: productImprovements } = useFetchRequest<ProductImprovementsResponse>(`/api/ai/product/${product.id}/suggestion`);
-  const { request } = useRequest<ProductRewriteResponse>();
-
-  const [rewrittenDescription, setRewrittenDescription] = useState<string>();
-
-  useEffectAsync(async () => {
-    if (!productImprovements) {
-      return;
-    }
-
-    const response = await request(`/api/ai/product/${product.id}/rewrite`);
-
-    console.log(response);
-    setRewrittenDescription(response.description);
-  }, [productImprovements, product.id]);
+  const { data: productImprovements } = usePollRequest<ProductImprovementsResponse>(
+    `/api/ai/product/${product.id}/suggestion`
+  );
+  const { data: rewrittenDescriptionResponse } = usePollRequest<ProductRewriteResponse>(
+    `/api/ai/product/${product.id}/rewrite`,
+    null,
+    Boolean(productImprovements)
+  );
 
   const isActive = insight?.relatedItemId === product.id;
 
@@ -43,13 +34,13 @@ export const ProductRowWithAi = ({
     if (isActive) {
       hideInsight();
     } else {
-      setInsight(createProductImprovementsInsight(product, productImprovements, rewrittenDescription));
+      setInsight(createProductImprovementsInsight(product, productImprovements, rewrittenDescriptionResponse.description));
     }
-  }, [isActive, product, productImprovements, rewrittenDescription]);
+  }, [isActive, product, productImprovements, rewrittenDescriptionResponse]);
 
   return (
     <ProductRow product={product} className={classnames(isActive && styles.highlighted)}>
-      {Boolean(productImprovements && rewrittenDescription) &&
+      {Boolean(productImprovements && rewrittenDescriptionResponse) &&
         <GummySuggestionAvailableButton onClick={onClick} />}
     </ProductRow>
   );

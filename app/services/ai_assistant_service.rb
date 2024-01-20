@@ -10,7 +10,7 @@ class AiAssistantService
 
     if existing_suggestion
       Rails.logger.info "Suggestion was already generated for #{id}. Returning cached version #{existing_suggestion.to_json}"
-      return { suggestion: existing_suggestion.suggestion, status: 'done' }
+      return existing_suggestion.suggestion
     end
 
     redis_key = RedisKeys.product_suggestion(id)
@@ -18,7 +18,7 @@ class AiAssistantService
     if $redis.get(redis_key)
       Rails.logger.info "Currently processing #{redis_key}"
 
-      { suggestion: nil, status: 'processing' }
+      nil
     else
       messages = [
         { 'role' => 'system', 'content' => ProductMetadataSuggestion.get_system_message(product) },
@@ -29,7 +29,7 @@ class AiAssistantService
 
       $redis.setex(redis_key, 600, true)
 
-      { suggestion: nil, status: 'processing' }
+      nil
     end
   end
 
@@ -40,7 +40,7 @@ class AiAssistantService
 
     if existing_change
       Rails.logger.info "Change was already generated for #{id}. Returning cached version #{existing_change.to_json}"
-      return { description: existing_change.description, status: 'done' }
+      return { description: existing_change.description }
     end
 
     existing_suggestion = AiProductMetadataSuggestion.find_by(product_id: id)
@@ -54,7 +54,7 @@ class AiAssistantService
     if $redis.get(redis_key)
       Rails.logger.info "Currently processing #{redis_key}"
 
-      { description: nil, status: 'processing' }
+      nil
     else
       product_description = product['description']
       description_suggestion = existing_suggestion['suggestion']['description']
@@ -70,7 +70,7 @@ class AiAssistantService
 
       $redis.setex(redis_key, 600, true)
 
-      { description: nil, status: 'processing' }
+      nil
     end
   end
 end

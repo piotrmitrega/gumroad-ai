@@ -10,7 +10,12 @@ module Api
 
         product = @gumroad_service.get_product(product_id)
         result = @assistant_service.get_product_suggestion(product)
-        render json: result
+
+        if result.nil?
+          head :no_content  # HTTP 204 with no content
+        else
+          render json: result, status: :ok  # HTTP 200 with JSON data
+        end
       end
 
       def product_rewrite
@@ -18,7 +23,12 @@ module Api
 
         product = @gumroad_service.get_product(product_id)
         result = @assistant_service.apply_product_suggestion(product)
-        render json: result
+
+        if result.nil?
+          head :no_content  # HTTP 204 with no content
+        else
+          render json: result, status: :ok  # HTTP 200 with JSON data
+        end
       end
 
       def new_product
