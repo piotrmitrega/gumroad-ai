@@ -33,7 +33,7 @@ export const ProductRowWithAi = ({
 
     const response = await request(`/api/ai/product/${product.id}/rewrite`);
 
-    console.log(response)
+    console.log(response);
     setRewrittenDescription(response.description);
   }, [productImprovements, product.id]);
 
@@ -43,13 +43,14 @@ export const ProductRowWithAi = ({
     if (isActive) {
       hideInsight();
     } else {
-      setInsight(createProductImprovementsInsight(product, productImprovements));
+      setInsight(createProductImprovementsInsight(product, productImprovements, rewrittenDescription));
     }
-  }, [isActive, product, productImprovements]);
+  }, [isActive, product, productImprovements, rewrittenDescription]);
 
   return (
     <ProductRow product={product} className={classnames(isActive && styles.highlighted)}>
-      {Boolean(productImprovements) && <GummySuggestionAvailableButton onClick={onClick} />}
+      {Boolean(productImprovements && rewrittenDescription) &&
+        <GummySuggestionAvailableButton onClick={onClick} />}
     </ProductRow>
   );
 };

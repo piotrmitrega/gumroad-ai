@@ -11,4 +11,6 @@
 
 .fullScreen {
   max-width: calc(100vw - 84px - 6rem);
+  background-color: var(--background-primary-color);
+  max-height: calc(100vh - 4rem);
 }

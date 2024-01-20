@@ -55,6 +55,7 @@ export const createProductImprovementsInsight = (
       customComponentId: GummyInsightCustomComponentId.RewrittenProduct,
       data: {
         productImprovements: improvementsData,
+        product,
         rewrittenDescription
       } as GummyRewrittenProductMessageData,
       mood: GummyMood.Concerned,
