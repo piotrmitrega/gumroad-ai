@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { ProductRewriteResponse, ProductImprovementsResponse } from "../../../types/ai";
 import { GummySuggestionAvailableButton } from "../../gummy/GummySuggestionAvailableButton";
 import { useGummyContext } from "../../../contexts/GumyContext";

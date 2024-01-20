@@ -1,6 +1,6 @@
 import { GummyMood } from "../enums/gummyMood";
 import { GummyInsightCustomComponentId } from "../enums/gummyInsightCustomComponentId";
-import { ProductImprovementItem, ProductImprovementsResponse, ProductRewriteResponse } from "./ai";
+import { ProductImprovementsResponse } from "./ai";
 import { Product } from "./api";
 
 export type GummyInsight = {
