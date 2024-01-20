@@ -9,16 +9,16 @@ module Api
         product_id = params[:productId]
 
         product = @gumroad_service.get_product(product_id)
-        products = @assistant_service.get_product_suggestion(product)
-        render json: products
+        result = @assistant_service.get_product_suggestion(product)
+        render json: result
       end
 
       def product_rewrite
         product_id = params[:productId]
 
         product = @gumroad_service.get_product(product_id)
-        description = @assistant_service.apply_product_suggestion(product)
-        render json: { description: description }
+        result = @assistant_service.apply_product_suggestion(product)
+        render json: result
       end
 
       def new_product
