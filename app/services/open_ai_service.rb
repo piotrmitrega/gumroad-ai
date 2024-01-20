@@ -1,8 +1,7 @@
-READ_TIMEOUT = 240
-
 class OpenAiService
   include HTTParty
   base_uri 'https://api.openai.com/v1'
+  READ_TIMEOUT = 240
 
   def initialize(access_token)
     @access_token = access_token
