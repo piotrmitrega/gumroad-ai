@@ -8,6 +8,7 @@ import { ProductsSection } from "../../components/dashboard/ProductsSection";
 import { ActivitySection } from "../../components/dashboard/ActivitySection";
 import { StatsSections } from "../../components/dashboard/StatsSection";
 import { GummyAvatarContainer } from "../../components/gummy/GummyAvatarContainer";
+import { useUserContext } from "../../contexts/UserContext";
 
 export const DashboardPage = (): JSX.Element => {
   const {
@@ -21,6 +22,8 @@ export const DashboardPage = (): JSX.Element => {
     isError: isSalesError,
     isFetching: isFetchingSales
   } = useFetchRequest<Sale[]>("/api/sales");
+
+  const { user } = useUserContext();
 
   const [totalSales, totalRevenue] = useMemo(() => {
     if (!products) {
@@ -49,7 +52,7 @@ export const DashboardPage = (): JSX.Element => {
   return (
     <PageWrapper>
       <HeaderWrapper>
-        <h1>Hey, Piotr! Welcome back to Gumroad.</h1>
+        <h1>Hey, {user.name}! Welcome back to Gumroad.</h1>
       </HeaderWrapper>
 
       <PageContentWrapper>
