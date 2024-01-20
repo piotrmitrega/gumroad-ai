@@ -25,7 +25,7 @@ class AiAssistantService
 
     response_text = create_open_ai_service.chat_completion(messages)
 
-    suggestion_record = AiProductMetadataSuggestion.create(product_id: id, suggestion: response_text)
+    suggestion_record = AiProductMetadataSuggestion.create(product_id: id, suggestion: JSON.parse(response_text))
 
     unless suggestion_record.save
       raise "Did not save suggestion to database"
