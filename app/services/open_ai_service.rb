@@ -1,3 +1,5 @@
+READ_TIMEOUT = 240
+
 class OpenAiService
   include HTTParty
   base_uri 'https://api.openai.com/v1'
@@ -13,14 +15,15 @@ class OpenAiService
     }
 
     body = {
-      model: "gpt-3.5-turbo",
+      model: "gpt-3.5-turbo-16k",
       messages: messages
     }.to_json
 
     response = self.class.post(
       '/chat/completions',
       headers: headers,
-      body: body
+      body: body,
+      read_timeout: READ_TIMEOUT
     )
 
     if response.code == 200
