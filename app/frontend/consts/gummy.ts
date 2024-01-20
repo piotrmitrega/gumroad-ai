@@ -1,8 +1,9 @@
-import { GummyInsight } from "../types/gummy";
+import { GummyInsight, GummyRewrittenProductMessageData } from "../types/gummy";
 import { GummyMood } from "../enums/gummyMood";
-import { ProductImprovementsData } from "../types/ai";
+import { ProductImprovementsResponse } from "../types/ai";
 import { Product } from "../types/api";
 import { stringifyProductImprovementItem } from "../utils/stringifyProductImprovementItem";
+import { GummyInsightCustomComponentId } from "../enums/gummyInsightCustomComponentId";
 
 export const WelcomeGummyInsight: GummyInsight = {
   name: "welcome",
@@ -36,7 +37,8 @@ export const AnalyzingDataGummyInsights: GummyInsight = {
 
 export const createProductImprovementsInsight = (
   product: Product,
-  improvementsData: ProductImprovementsData
+  improvementsData: ProductImprovementsResponse,
+  rewrittenDescription: string
 ): GummyInsight => {
   const {
     tags,
@@ -50,8 +52,14 @@ export const createProductImprovementsInsight = (
     searchable: true,
     messages: [{
       content: `${stringifyProductImprovementItem(description)}\n\n${stringifyProductImprovementItem(tags)}`,
+      customComponentId: GummyInsightCustomComponentId.RewrittenProduct,
+      data: {
+        productImprovements: improvementsData,
+        rewrittenDescription
+      } as GummyRewrittenProductMessageData,
       mood: GummyMood.Concerned,
-      skippable: false
+      skippable: false,
+      fullScreen: true
     }]
   };
 };

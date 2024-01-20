@@ -1,4 +1,6 @@
 import { GummyMood } from "../enums/gummyMood";
+import { GummyInsightCustomComponentId } from "../enums/gummyInsightCustomComponentId";
+import { ProductImprovementItem, ProductImprovementsResponse, ProductRewriteResponse } from "./ai";
 
 export type GummyInsight = {
   name: string;
@@ -9,9 +11,17 @@ export type GummyInsight = {
 }
 
 export type GummyMessage = {
-  content: string;
   skippable: boolean;
+  content?: string;
+  fullScreen?: boolean;
   hideAfterMs?: number;
   action?: () => void;
   mood?: GummyMood;
+  customComponentId?: GummyInsightCustomComponentId;
+  data?: Record<string, any>;
+}
+
+export type GummyRewrittenProductMessageData = {
+  productImprovements: ProductImprovementsResponse;
+  rewrittenDescription: string;
 }

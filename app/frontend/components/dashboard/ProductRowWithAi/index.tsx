@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import { ProductImprovementsData } from "../../../types/ai";
+import React, { useCallback, useEffect, useState } from "react";
+import { ProductRewriteResponse, ProductImprovementsResponse } from "../../../types/ai";
 import { GummySuggestionAvailableButton } from "../../gummy/GummySuggestionAvailableButton";
 import { useGummyContext } from "../../../contexts/GumyContext";
 import { createProductImprovementsInsight } from "../../../consts/gummy";
@@ -7,6 +7,8 @@ import classnames from "classnames";
 import { useFetchRequest } from "../../../hooks/useFetchRequest";
 import { ProductRow, ProductRowProps } from "../ProductRow";
 import styles from "./styles.module.scss";
+import { useRequest } from "../../../hooks/useRequest";
+import { useEffectAsync } from "../../../hooks/useEffectAsync";
 
 export type ProductRowWithAiProps = ProductRowProps;
 
@@ -19,7 +21,21 @@ export const ProductRowWithAi = ({
     hideInsight
   } = useGummyContext();
 
-  const { data: productImprovements } = useFetchRequest<ProductImprovementsData>(`/api/ai/product/${product.id}`);
+  const { data: productImprovements } = useFetchRequest<ProductImprovementsResponse>(`/api/ai/product/${product.id}/suggestion`);
+  const { request } = useRequest<ProductRewriteResponse>();
+
+  const [rewrittenDescription, setRewrittenDescription] = useState<string>();
+
+  useEffectAsync(async () => {
+    if (!productImprovements) {
+      return;
+    }
+
+    const response = await request(`/api/ai/product/${product.id}/rewrite`);
+
+    console.log(response)
+    setRewrittenDescription(response.description);
+  }, [productImprovements, product.id]);
 
   const isActive = insight?.relatedItemId === product.id;
 

@@ -3,7 +3,11 @@ export type ProductImprovementItem = {
   suggestions: string[];
 }
 
-export type ProductImprovementsData = {
+export type ProductImprovementsResponse = {
   description: ProductImprovementItem;
   tags: ProductImprovementItem;
+}
+
+export type ProductRewriteResponse = {
+  description: string;
 }

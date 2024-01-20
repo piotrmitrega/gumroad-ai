@@ -1,7 +1,7 @@
 import React from "react";
 import { Product } from "../../../types/api";
 import styles from "./styles.module.scss";
-import { ProductImprovementsData } from "../../../types/ai";
+import { ProductImprovementsResponse } from "../../../types/ai";
 import { ProductRow } from "../ProductRow";
 import { chooseProductIdsToAnalyze } from "../../../utils/chooseProductIdsToAnalyze";
 import { ProductRowWithAi } from "../ProductRowWithAi";

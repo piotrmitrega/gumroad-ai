@@ -3,6 +3,7 @@ import classnames from "classnames";
 import { SpeechBalloonWrapper } from "../SpeechBalloonWrapper";
 import { useGummyContext } from "../../../contexts/GumyContext";
 import styles from "./styles.module.scss";
+import { GummyMessageContainer } from "../GummyMessageContainer";
 
 export type GummyInsightsProps = {}
 
@@ -57,10 +58,14 @@ export const GummyInsights = ({}: GummyInsightsProps): JSX.Element => {
 
   return (
     <SpeechBalloonWrapper
-      className={classnames(styles.balloon, currentMessage.skippable && styles.clickable)}
+      className={classnames(
+        styles.balloon,
+        currentMessage.skippable && styles.clickable,
+        currentMessage.fullScreen && styles.fullScreen
+      )}
       onClick={onClick}
     >
-      {currentMessage.content}
+      <GummyMessageContainer message={currentMessage} />
     </SpeechBalloonWrapper>
   );
 };
