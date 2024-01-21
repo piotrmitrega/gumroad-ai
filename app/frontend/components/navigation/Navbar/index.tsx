@@ -69,7 +69,7 @@ export const Navbar = (): JSX.Element => {
         </NavLinkWithIcon>
       </section>
 
-      <section className={styles.navSection}>
+      <section className={classnames(styles.navSection, styles.bottomSection)}>
         <NavLinkWithIcon disabled iconType={IconType.BookOpen}>
           Help
         </NavLinkWithIcon>
