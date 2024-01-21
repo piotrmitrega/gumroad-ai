@@ -3,10 +3,10 @@ import avatarsPath from "../../images/avatars.webp";
 import { Logo } from "../../components/base/Logo";
 import { Icon } from "../../components/base/Icon";
 import { IconType } from "../../enums/iconType";
-import styles from "./styles.module.scss";
 import { GummyAvatar } from "../../components/gummy/GummyAvatar";
 import { GummyMood } from "../../enums/gummyMood";
 import { SpeechBalloonWrapper } from "../../components/gummy/SpeechBalloonWrapper";
+import styles from "./styles.module.scss";
 
 export const LoginPage = (): JSX.Element => {
   const onLogin = useCallback(() => {
