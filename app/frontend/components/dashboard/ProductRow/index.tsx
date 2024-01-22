@@ -31,7 +31,7 @@ export const ProductRow = ({
       <td>{product.sales_count}</td>
       <td>${product.sales_usd_cents / 100}</td>
       <td>${product.price / 100}</td>
-      <td>
+      <td className={styles.lastCell}>
         {product.published ? "Published" : "Unpublished"}
         {children}
       </td>
