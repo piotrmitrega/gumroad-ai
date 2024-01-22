@@ -14,4 +14,5 @@ export enum IconType {
   Search = 'search',
   Settings = 'settings',
   Shop = 'shop',
+  XSquare = 'xSquare',
 }

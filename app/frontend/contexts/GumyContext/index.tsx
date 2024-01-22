@@ -5,7 +5,7 @@ import { WelcomeGummyInsight } from "../../consts/gummy";
 
 export type GummyContextValue = {
   setInsight: (insight: GummyInsight) => void;
-  hideInsight: (purgeQueue?: boolean) => void;
+  hideInsight: () => void;
   insight: GummyInsight | null;
   mood: GummyMood;
   setMood: (mood: GummyMood) => void;
